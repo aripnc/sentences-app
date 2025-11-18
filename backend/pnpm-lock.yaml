@@ -35,9 +35,15 @@ importers:
       openai:
         specifier: ^6.8.1
         version: 6.8.1(zod@4.1.12)
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
       socket.io:
         specifier: ^4.8.1
         version: 4.8.1
+      tsyringe:
+        specifier: ^4.10.0
+        version: 4.10.0
       zod:
         specifier: ^4.1.12
         version: 4.1.12

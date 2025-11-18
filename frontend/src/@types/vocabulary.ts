@@ -8,7 +8,7 @@ export type SentenceProps = {
   fator: number;
 };
 
-export interface Vocabulary {
+export interface VocabularyProps {
   id: string;
   description: string;
   difficulty: "EASY" | "MEDIUM" | "HARD";

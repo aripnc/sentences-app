@@ -1,11 +1,11 @@
 "use client";
-import { trpc } from "@/trpc-client/client";
 import { columns } from "./components/data-table/columns";
 import { DataTable } from "./components/data-table/data-table";
 import { SkeletonDataTable } from "./components/data-table/skeleton-data-table";
+import {useQuery} from '@tanstack/react-query'
 
 export default function Dashboard() {
-  const data = trpc.fetchVocabularies.useQuery();
+  const data = useQuery();
 
   return (
     <div className="h-full flex flex-col justify-center">
