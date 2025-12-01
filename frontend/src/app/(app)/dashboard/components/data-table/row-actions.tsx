@@ -1,11 +1,11 @@
 "use client";
 
-import type { Vocabulary } from "@/@types/vocabulary";
+import type { VocabularyProps } from "@/@types/vocabulary";
 import EditForm from "../edit-form";
 import { SentencesComponent } from "../sentences";
 
 type RowActionsProps = {
-  vocabulary: Vocabulary;
+  vocabulary: VocabularyProps;
 };
 
 export default function RowActions({ vocabulary }: RowActionsProps) {

@@ -1,22 +1,23 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { trpc } from "@/trpc-client/client";
+import { fetchSentencesToReview, updateSentence } from "@/routes/sentences";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Eye, Frown, Smile, ThumbsUp } from "lucide-react";
 import { useState } from "react";
 
 export default function Review() {
-  const fetchSentencesToReview = trpc.fetchSentencesToReview.useQuery();
-  const updateSentence = trpc.updateSentence.useMutation({
-    onSuccess: () => {
-      fetchSentencesToReview.refetch();
-    },
+  const queryClient = useQueryClient();
+  const { data } = useQuery({
+    queryKey: ["sentences"],
+    queryFn: fetchSentencesToReview,
+    // refetchInterval: 3000
   });
 
   const rowsPerPage = 1;
   const [currentPage, setCurrentPage] = useState(1);
   const [showTranslation, setShowTranslation] = useState(false);
-  const dataLength = fetchSentencesToReview.data?.length ?? 0;
-  const sentencesToReview = fetchSentencesToReview.data ?? [];
+  const dataLength = data?.length ?? 0;
+  const sentencesToReview = data ?? [];
 
   const currentSentence =
     dataLength > 0 ? sentencesToReview[(currentPage - 1) * rowsPerPage] : null;
@@ -54,10 +55,12 @@ export default function Review() {
       currentSentence.interval * 24 * 60 * 60 * 1000;
     const nextReviewDate = new Date(now + intervalInMilliseconds);
     currentSentence.nextReview = nextReviewDate;
-
-    updateSentence.mutate({
-      ...currentSentence,
-    });
+    // useQuery({
+    //   queryKey: ["sentences"],
+    //   queryFn: () => updateSentence({ data: currentSentence }),
+    // });
+    await updateSentence({ data: currentSentence }),
+      queryClient.invalidateQueries({ queryKey: ["sentences"] });
 
     handleNext();
   };
@@ -72,9 +75,8 @@ export default function Review() {
     const now = new Date().getTime();
     currentSentence.nextReview = new Date(now + 1);
 
-    updateSentence.mutate({
-      ...currentSentence,
-    });
+    await updateSentence({ data: currentSentence }),
+      queryClient.invalidateQueries({ queryKey: ["sentences"] });
 
     handleNext();
   };

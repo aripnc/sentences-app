@@ -1,5 +1,5 @@
 "use client";
-import type { Vocabulary } from "@/@types/vocabulary";
+import type { VocabularyProps } from "@/@types/vocabulary";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,15 +27,16 @@ import {
 import { classificacaoSchema, dificultySchema } from "@/contracts";
 import { classificacaoHelper, dificultyHelper } from "@/helpers";
 import { toast } from "@/hooks/use-toast";
-import { trpc } from "@/trpc-client/client";
+import { updateVocabulary } from "@/routes/vocabularies";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Edit2Icon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 type EditFormProps = {
-  vocabulary: Vocabulary;
+  vocabulary: VocabularyProps;
 };
 
 const difficultyEnum = dificultySchema;
@@ -47,17 +48,7 @@ const formSchema = z.object({
 });
 
 export default function EditForm({ vocabulary }: EditFormProps) {
-  const fetchVocabularies = trpc.fetchVocabularies.useQuery();
-  const updateVocabulary = trpc.updateVocabulary.useMutation({
-    onSettled: () => {
-      fetchVocabularies.refetch();
-      toast({
-        title: "Vocabulario atualizado",
-        variant: "success",
-      });
-    },
-  });
-
+  const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,11 +65,8 @@ export default function EditForm({ vocabulary }: EditFormProps) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { difficulty, type } = values;
 
-    updateVocabulary.mutate({
-      ...vocabulary,
-      difficulty,
-      type,
-    });
+    await updateVocabulary({ vocabularyId: vocabulary.id, difficulty, type }),
+      queryClient.invalidateQueries({ queryKey: ["vocabulary"] });
 
     setIsOpen(false);
   }

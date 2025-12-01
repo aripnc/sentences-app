@@ -20,8 +20,10 @@ import {
 import { classificacaoSchema } from "@/contracts";
 import { classificacaoHelper, sentencesQuantity } from "@/helpers";
 import { toast } from "@/hooks/use-toast";
-import { trpc } from "@/trpc-client/client";
+import { createSentences } from "@/routes/sentences/create-sentences";
+import { createVocabulary } from "@/routes/vocabularies";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { BrushCleaning, IterationCcwIcon, Loader } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -37,8 +39,6 @@ const formSchema = z.object({
 });
 
 export default function Vocabularies() {
-  const createVocabulary = trpc.createVocabulary.useMutation();
-  const createSentences = trpc.createSentences.useMutation();
   const [text, setText] = useState<string>("");
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -55,7 +55,7 @@ export default function Vocabularies() {
     socket.off("sentences");
     socket.on("sentences", (data: string) => {
       setText((prev) => prev + data);
-      console.log(data);
+      // console.log(data);
     });
 
     socket.on("sentences.done", () => {
@@ -89,30 +89,24 @@ export default function Vocabularies() {
     formData: z.infer<typeof formSchema>,
   ) => {
     const { vocabulary, tipo } = formData;
-    createVocabulary.mutate(
-      {
-        description: vocabulary,
-        type: tipo,
-      },
-      {
-        onSuccess: (data) => {
-          createSentences.mutate({
-            vocabularyId: data.id,
-            sentences: frases!,
-          });
-          toast({
-            title: "Vocabulario e frases salvas",
-            variant: "success",
-          });
-        },
-        onError: (data) => {
-          toast({
-            title: "Error ao salvar vocabulario e frases",
-            variant: "destructive",
-          });
-        },
-      },
-    );
+
+    const data = await createVocabulary({
+      description: vocabulary,
+      type: tipo,
+    });
+    console.log(data);
+
+    if (data && frases) {
+      await createSentences({
+        vocabularyId: data.id,
+        sentences: frases,
+      });
+      toast({
+        title: "Vocabulario e frases salvas",
+        variant: "success",
+      });
+    }
+
     handleClear();
   };
 

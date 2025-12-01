@@ -1,5 +1,5 @@
 "use client";
-import type { Vocabulary } from "@/@types/vocabulary";
+import type { VocabularyProps } from "@/@types/vocabulary";
 import {
   Accordion,
   AccordionContent,
@@ -13,16 +13,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { trpc } from "@/trpc-client/client";
+import { fetchSentencesByVocabularyId } from "@/routes/sentences";
+import { useQuery } from "@tanstack/react-query";
 import { FileSearch } from "lucide-react";
 
 interface SentencesComponentProps {
-  vocabulary: Vocabulary;
+  vocabulary: VocabularyProps;
 }
 
 export function SentencesComponent({ vocabulary }: SentencesComponentProps) {
-  const sentences = trpc.fetchSentencesByVocabularyId.useQuery({
-    vocabularyId: vocabulary.id,
+  const { data } = useQuery({
+    queryKey: ["sentences"],
+    queryFn: () =>
+      fetchSentencesByVocabularyId({ vocabularyId: vocabulary.id }),
   });
 
   return (
@@ -40,7 +43,7 @@ export function SentencesComponent({ vocabulary }: SentencesComponentProps) {
             collapsible
             className="w-full tracking-tight"
           >
-            {sentences.data?.map((sentence, i) => (
+            {data?.map((sentence, i) => (
               <AccordionItem value={`item-${i}`} key={i}>
                 <AccordionTrigger className="text-lg font-semibold ">
                   {sentence.description}

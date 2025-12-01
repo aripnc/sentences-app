@@ -1,11 +1,11 @@
 "use client";
-import type { Vocabulary } from "@/@types/vocabulary";
+import type { VocabularyProps } from "@/@types/vocabulary";
 import type { ColumnDef } from "@tanstack/react-table";
 import RowActions from "./row-actions";
 
 import { Badge } from "@/components/ui/badge";
 
-export const columns: ColumnDef<Vocabulary>[] = [
+export const columns: ColumnDef<VocabularyProps>[] = [
   {
     accessorKey: "description",
     header: "Descrição",

@@ -1,10 +1,10 @@
-import type { FastifyInstance } from 'fastify';
-import { auth } from '@/utils/auth';
+import type { FastifyInstance } from "fastify";
+import { auth } from "@/utils/auth";
 
 export function BetterAuthRoute(app: FastifyInstance) {
   app.route({
-    method: ['GET', 'POST'],
-    url: '/api/auth/*',
+    method: ["GET", "POST"],
+    url: "/api/auth/*",
     async handler(request, reply) {
       try {
         const url = new URL(request.url, `http://${request.headers.host}`);
@@ -30,8 +30,8 @@ export function BetterAuthRoute(app: FastifyInstance) {
         app.log.error(error);
 
         reply.status(500).send({
-          error: 'Internal authentication error',
-          code: 'AUTH_FAILURE',
+          error: "Internal authentication error",
+          code: "AUTH_FAILURE",
         });
       }
     },

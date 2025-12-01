@@ -2,13 +2,13 @@
   "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
   "files": {
     "ignoreUnknown": true,
-    "include": ["./src/**/*"],
-    "ignore": ["./src/generated"]
+    "include": ["./src/**/*"]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "formatWithErrors": true
   },
   "organizeImports": {
     "enabled": true

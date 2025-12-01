@@ -16,19 +16,13 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
-      "suspicious": {
-        "useIterableCallbackReturn": "off"
-      }
+      "recommended": true
     }
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single",
+      "quoteStyle": "double",
       "lineWidth": 80
-    },
-    "parser": {
-      "unsafeParameterDecoratorsEnabled": true
     }
   },
   "assist": {

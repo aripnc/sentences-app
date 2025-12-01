@@ -1,11 +1,11 @@
-import { PlusIcon } from "lucide-react"
-import { Accordion as AccordionPrimitive } from "radix-ui"
+import { PlusIcon } from "lucide-react";
+import { Accordion as AccordionPrimitive } from "radix-ui";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
 const items = [
   {
@@ -32,7 +32,7 @@ const items = [
     content:
       "All components follow WAI-ARIA standards, featuring proper ARIA attributes, keyboard navigation, and screen reader support. Regular testing ensures compatibility with NVDA, VoiceOver, and JAWS.",
   },
-]
+];
 
 export default function Component() {
   return (
@@ -67,5 +67,5 @@ export default function Component() {
         ))}
       </Accordion>
     </div>
-  )
+  );
 }
