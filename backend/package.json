@@ -7,7 +7,8 @@
     "dev": "tsx watch src/infra/http/server.ts",
     "start": "node --watch dist/infra/http/server.js",
     "build": "tsup",
-    "fix": "pnpm exec biome format --write"
+    "fix": "pnpm exec biome format --write",
+    "migrate:dev": "pnpm prisma migrate dev"
   },
   "keywords": [],
   "author": "",

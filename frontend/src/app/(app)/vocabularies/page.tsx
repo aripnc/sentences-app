@@ -117,7 +117,7 @@ export default function Vocabularies() {
 
   return (
     <>
-      <div className=" w-[800px] border rounded-sm self-center py-10 px-4">
+      <div className="w-[1200px] border rounded-sm self-center py-10 px-4">
         <Form {...form}>
           <div>
             <form
@@ -211,22 +211,7 @@ export default function Vocabularies() {
             </form>
           </div>
         </Form>
-      </div>
-      <div className="mt-10 w-[800px] self-center pb-6">
-        {/* {generateSentences.isPending && (
-          <Dialog open>
-            <DialogContent>
-              <DialogTitle className="text-lg flex flex-col items-center">
-                <Loader className="animate-spin" size={45} />
-                Gerando frases
-              </DialogTitle>
-              <DialogDescription className="text-base text-center">
-                Estamos gerando as frases, por favor aguarde...
-              </DialogDescription>
-            </DialogContent>
-          </Dialog>
-        )} */}
-
+      <div className="mt-10 w-full self-center pb-6">
         <div className="space-y-5">
           <Sentences frases={frases ?? []} />
           <Button
@@ -239,41 +224,7 @@ export default function Vocabularies() {
           </Button>
         </div>
 
-        {/* <ScrollArea className="w-full h-72 rounded-md border">
-          <div className="space-y-5 px-5 py-5 shadow-accent">
-            {frases.map((item, i) => (
-              <div
-                key={i}
-                className="outline-2 rounded-sm p-2 flex items-center justify-between"
-              >
-                <div className="space-y-2">
-                  <p className="font-semibold text-base tracking-wide">
-                    {item.frase}
-                  </p>
-                  <p className="text-slate-400">{item.traducao}</p>
-                </div>
-
-                <CopyToClipboard
-                  text={item.frase}
-                  onCopy={() => {
-                    setCopiedIndex(i);
-                    setTimeout(() => {
-                      setCopiedIndex(null);
-                    }, 2000);
-                  }}
-                >
-                  <Button size="icon" variant="ghost">
-                    {copiedIndex === i ? (
-                      <Check color="green" size={16} />
-                    ) : (
-                      <Copy size={16} />
-                    )}
-                  </Button>
-                </CopyToClipboard>
-              </div>
-            ))}
-          </div>
-        </ScrollArea> */}
+      </div>
       </div>
     </>
   );

@@ -4,11 +4,11 @@ services:
      container_name: backend
      build:
        context: ./backend
-       dockerfile: Dockerfile
+       dockerfile: Dockerfile.dev
     # env_file: 
     #  - .env   
      volumes:
-        - ./backend:/backend/src
+        - ./backend:/app
      restart: always
      ports:
        - 3333:3333    
@@ -31,11 +31,11 @@ services:
     container_name: frontend
     build:
      context: ./frontend
-     dockerfile: Dockerfile 
+     dockerfile: Dockerfile.dev 
     env_file: 
       - .env   
     volumes:
-      - ./frontend:/frontend/src
+      - ./frontend:/app
     restart: always
     ports:
        - 3000:3000

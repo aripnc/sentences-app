@@ -1,0 +1,15 @@
+{
+  "name": "sentences-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "services:up": "docker compose up -d",
+    "services:down": "docker compose down -v",
+    "dev": "pnpm services:up",
+    "migrate": "pnpm --filter backend migrate:dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
