@@ -23,8 +23,7 @@ ENV NODE_ENV=production
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 
-ENV PORT=${PORT}
 
-EXPOSE ${PORT}
+EXPOSE 3000
 
 CMD ["node", "server.js"]
