@@ -1,13 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Form,
   FormControl,
   FormField,
@@ -162,94 +155,5 @@ export default function SignUpForm() {
         </form>
       </Form>
     </div>
-
-    // <Card className="">
-    //   <CardHeader>
-    //     <CardTitle className="text-2xl">Criar conta</CardTitle>
-    //     <CardDescription>Cadastrar sua conta</CardDescription>
-    //   </CardHeader>
-
-    //   <CardContent>
-    //     <Form {...form}>
-    //       <div className="flex flex-col gap-6">
-    //         <form
-    //           onSubmit={form.handleSubmit(handleSignUp)}
-    //           className="space-y-8"
-    //         >
-    //           <FormField
-    //             control={form.control}
-    //             name="name"
-    //             render={({ field }) => (
-    //               <FormItem>
-    //                 <FormLabel>Username</FormLabel>
-    //                 <FormControl>
-    //                   <Input
-    //                     className="bg-input"
-    //                     placeholder="Digite um nome"
-    //                     {...field}
-    //                   />
-    //                 </FormControl>
-    //                 <FormMessage />
-    //               </FormItem>
-    //             )}
-    //           />
-
-    //           <FormField
-    //             control={form.control}
-    //             name="email"
-    //             render={({ field }) => (
-    //               <FormItem>
-    //                 <FormLabel>Email</FormLabel>
-    //                 <FormControl>
-    //                   <Input
-    //                     className="bg-input"
-    //                     placeholder="Digite um email"
-    //                     {...field}
-    //                   />
-    //                 </FormControl>
-    //                 <FormMessage />
-    //               </FormItem>
-    //             )}
-    //           />
-    //           <FormField
-    //             control={form.control}
-    //             name="password"
-    //             render={({ field }) => (
-    //               <FormItem>
-    //                 <FormLabel>Password</FormLabel>
-    //                 <FormControl>
-    //                   <Input
-    //                     className="bg-input"
-    //                     placeholder="Crie uma senha"
-    //                     {...field}
-    //                   />
-    //                 </FormControl>
-    //                 <FormMessage />
-    //               </FormItem>
-    //             )}
-    //           />
-
-    //           <Button variant="default" className="w-full" type="submit">
-    //             Cadastrar
-    //           </Button>
-
-    //           <div className="w-full text-center text-base text-destructive">
-    //             {error}
-    //           </div>
-
-    //           <div className="text-center text-lg">
-    //             Já tem uma conta?{" "}
-    //             <a
-    //               href="/login"
-    //               className="text-primary underline underline-offset-4"
-    //             >
-    //               Login
-    //             </a>
-    //           </div>
-    //         </form>
-    //       </div>
-    //     </Form>
-    //   </CardContent>
-    // </Card>
   );
 }

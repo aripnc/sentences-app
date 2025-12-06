@@ -46,7 +46,7 @@ export default function LoginForm() {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: "http://localhost:3000/dashboard",
+      callbackURL: `${process.env.NEXT_PUBLIC_URL}/dashboard`,
     });
 
     if (error) {
@@ -57,13 +57,13 @@ export default function LoginForm() {
   const handleSignInWithGoogle = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "http://localhost:3000/dashboard",
+      callbackURL: `${process.env.NEXT_PUBLIC_URL}/dashboard`,
     });
   };
   const handleSignInWithDiscord = async () => {
     await authClient.signIn.social({
       provider: "discord",
-      callbackURL: "http://localhost:3000/dashboard",
+      callbackURL:`${process.env.NEXT_PUBLIC_URL}/dashboard`,
     });
   };
 
