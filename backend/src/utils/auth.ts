@@ -9,7 +9,10 @@ export const auth = betterAuth({
       maxAge: 300,
     },
   },
-  trustedOrigins: ["http://localhost:3000"],
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://sentences-app-web.onrender.com"
+  ],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
