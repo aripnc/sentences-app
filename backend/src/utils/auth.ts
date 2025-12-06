@@ -11,9 +11,7 @@ export const auth = betterAuth({
   },
   trustedOrigins: [
     "http://localhost:3000",
-    "http://localhost:3333",
     "https://sentences-app.vercel.app",
-    "https://sentences-app.onrender.com"
   ],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
@@ -23,9 +21,14 @@ export const auth = betterAuth({
     autoSignIn: true,
   },
   advanced: {
+     cookiePrefix: 'better-auth',
      defaultCookieAttributes: {
        sameSite: "None",
        secure: true
+     },
+     crossSubDomainCookies: {
+       enabled: true,
+       domain: 'https://sentences-app.onrender.com'
      }
   },
   socialProviders: {
