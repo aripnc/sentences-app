@@ -10,7 +10,7 @@ const REDIRECT_WHEN_NOT_AUTHENTICATED = "/login";
 export function middleware(req: NextRequest) {
   console.log(
     "[MIDDLEWARE_SESSION_TOKEN]: ",
-    req.cookies.get("better-auth.session_token"),
+    req.cookies.get("__Secure-better-auth.session_token"),
   );
 
   const currentPath = req.nextUrl.pathname;
@@ -18,8 +18,8 @@ export function middleware(req: NextRequest) {
     (route) => route.path === currentPath,
   );
 
-  // const authtoken = req.cookies.get("__Secure-better-auth.session_token");
-  const authtoken = req.cookies.get("better-auth.session_token");
+  const authtoken = req.cookies.get("__Secure-better-auth.session_token");
+  // const authtoken = req.cookies.get("better-auth.session_token");
 
   if (!authtoken && isPublicRoute) {
     return NextResponse.next();
