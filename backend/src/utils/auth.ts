@@ -28,10 +28,6 @@ export const auth = betterAuth({
        sameSite: "None",
        secure: true
      },
-     crossSubDomainCookies: {
-       enabled: true,
-       domain: 'https://sentences-app.vercel.app'
-     }
   },
   socialProviders: {
     google: {
