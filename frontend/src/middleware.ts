@@ -7,7 +7,6 @@ const publicRoutes = [
 
 const REDIRECT_WHEN_NOT_AUTHENTICATED = "/login";
 
-export const runtime = "nodejs";
 
 export function middleware(req: NextRequest) {
   console.log(
@@ -55,5 +54,4 @@ export const config = {
   matcher: [
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
-  runtime: "nodejs",
 };

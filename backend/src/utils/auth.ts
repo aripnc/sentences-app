@@ -12,7 +12,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3333",
-    "https://sentences-app.vercel.app",
+    'https://sentences-app-web.onrender.com',
     'https://sentences-app.onrender.com'
   ],
   database: prismaAdapter(prisma, {
