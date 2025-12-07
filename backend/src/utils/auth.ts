@@ -23,9 +23,8 @@ export const auth = betterAuth({
     autoSignIn: true,
   },
   advanced: {
-     useSecureCookies: true,
      defaultCookieAttributes: {
-       sameSite: "None",
+       sameSite: 'none',
        secure: true
      },
   },
